@@ -2,24 +2,47 @@
 <p>This will be offline if above 25, and online otherwise</p>
 <p>Status: {{serverStatus}}</p>
 
-<label>Server Name</label>
+<label>Username</label>
 <input 
   type="text" 
   class="form-control"
-  (input)="onUpdateServerName($event)"
+  [(ngModel)]="username"
 >
-<p>Text you're typing: {{inputText}}</p>
+<p>{{username}}</p>
+<button [disabled]="!username.length" class="btn btn-primary" (click)="resetUsername()">Reset username</button>
+<hr>
+<label>Server Name</label>
+<!-- <input 
+  type="text" 
+  class="form-control"
+  (input)="onUpdateServerName($event)"
+> -->
+<input 
+  type="text"
+  class="form-control"
+  [(ngModel)]="serverName"
+/>
+<p>Text you're typing: {{serverName}}</p>
 <hr>
 <button 
   class="btn btn-primary" 
-  (click)="toggleServer()"
-  (click)="onCreateServer()"
+  (click)="onCreateServer(serverName)"
 >
 <!-- [disabled]="!allowNewServer" -->
   Add Server
 </button>
+<p 
+  [ngStyle]="{backgroundColor: getColor()}" 
+  *ngIf="serverCreated; else noServer"
+  [ngClass]="{online: serverStatus==='online'}"
+>
+  {{serverCreationStatus}}
+</p>
+<ng-template #noServer><p>No server has been created</p></ng-template>
 
-<p>{{serverCreationStatus}}</p>
+<ul *ngFor="let server of servers">
+  <li>{{server}}</li>
+</ul>
 
 <p>Status of allowNewServer: {{allowNewServer}}</p>
 <hr>

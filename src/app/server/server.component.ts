@@ -8,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 export class ServerComponent implements OnInit {
 
   serverId : number;
-  serverStatus: string = this.serverId > 25 ? 'offline' : 'online';
+  serverStatus: string;
   allowNewServer : boolean = false;
   showImage: boolean;
   imageSource: string;
   serverCreationStatus : string = 'No server created';
-  inputText: string = '';
+  serverName: string = '';
+  serverCreated: boolean = false;
+  username: string = '';
+  servers = [];
 
   constructor() {
     setTimeout(()=> {
@@ -21,17 +24,23 @@ export class ServerComponent implements OnInit {
     },2000);
     this.imageDisplay();
     this.getImageSource();
+    this.getColor();
   }
 
   ngOnInit() {
-    this.getServerId();
+    this.setServerId();
+    this.setServerStatus();
   }
 
   toggleServer() {
     this.allowNewServer = !this.allowNewServer;
   }
 
-  getServerId() {
+  setServerStatus() {
+    return this.serverStatus = this.serverId > 25 ? 'offline' : 'online';
+  }
+
+  setServerId() {
     this.serverId = Math.floor(Math.random() * 50 + 1);
     return this.serverId;
   }
@@ -46,13 +55,24 @@ export class ServerComponent implements OnInit {
     this.showImage = decidingFactor > 0.5 ? true : false;
   }
 
-  onCreateServer() {
-    this.serverCreationStatus = 'Server created!';
+  onCreateServer(server) {
+    this.serverCreated = true;
+    this.serverCreationStatus = `Server created with name ${this.serverName}`;
+    console.log('just created server: ', server);
+    this.servers.unshift(server);
   }
 
   onUpdateServerName(e: Event) {
     // console.log('e: ', e);
-    this.inputText = (<HTMLInputElement>e.target).value;
+    this.serverName = (<HTMLInputElement>e.target).value;
+  }
+
+  resetUsername() {
+    this.username = '';
+  }
+
+  getColor() {
+    return this.serverStatus == 'online' ? 'green' : 'red';
   }
 
 }
