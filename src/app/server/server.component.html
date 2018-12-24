@@ -2,13 +2,24 @@
 <p>This will be offline if above 25, and online otherwise</p>
 <p>Status: {{serverStatus}}</p>
 
+<label>Server Name</label>
+<input 
+  type="text" 
+  class="form-control"
+  (input)="onUpdateServerName($event)"
+>
+<p>Text you're typing: {{inputText}}</p>
+<hr>
 <button 
   class="btn btn-primary" 
   (click)="toggleServer()"
-  [disabled]="!allowNewServer"
+  (click)="onCreateServer()"
 >
+<!-- [disabled]="!allowNewServer" -->
   Add Server
 </button>
+
+<p>{{serverCreationStatus}}</p>
 
 <p>Status of allowNewServer: {{allowNewServer}}</p>
 <hr>

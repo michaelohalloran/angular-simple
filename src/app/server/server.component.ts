@@ -12,6 +12,8 @@ export class ServerComponent implements OnInit {
   allowNewServer : boolean = false;
   showImage: boolean;
   imageSource: string;
+  serverCreationStatus : string = 'No server created';
+  inputText: string = '';
 
   constructor() {
     setTimeout(()=> {
@@ -42,6 +44,15 @@ export class ServerComponent implements OnInit {
   imageDisplay() {
     let decidingFactor = Math.random();
     this.showImage = decidingFactor > 0.5 ? true : false;
+  }
+
+  onCreateServer() {
+    this.serverCreationStatus = 'Server created!';
+  }
+
+  onUpdateServerName(e: Event) {
+    // console.log('e: ', e);
+    this.inputText = (<HTMLInputElement>e.target).value;
   }
 
 }
