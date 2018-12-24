@@ -1,3 +1,22 @@
-<p>
-  directives works!
-</p>
+<h3>
+  Display details
+</h3>
+
+<button 
+  class="btn btn-primary"
+  (click)="toggleDetails()"
+>
+  Show details
+</button>
+<hr>
+<p *ngIf="showPw">Secret Password: {{pw}}</p>
+
+<ul class="list-group" *ngFor="let item of record">
+  <li 
+    class="list-group-item"
+    [ngStyle]="{backgroundColor: applyBackground(item.click)}"
+    [ngClass]="{textColor: applyColor(item.click)}"
+  >
+    Click #{{item.click}}, Time: {{item.time | date : 'medium'}}
+  </li>
+</ul>
