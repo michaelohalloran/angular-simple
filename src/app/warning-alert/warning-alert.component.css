@@ -1,0 +1,9 @@
+h3 {
+    color: darkred;
+    text-align: center;
+    text-shadow: 1px 1px 1px ghostwhite;
+    font-size: 1.4rem;
+    border: 1px dotted black;
+    background-color: lightcoral;
+    padding: 3%;
+}

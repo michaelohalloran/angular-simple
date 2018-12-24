@@ -1,0 +1,19 @@
+<p>{{'Server'}} has server Id of {{serverId}}</p>
+<p>This will be offline if above 25, and online otherwise</p>
+<p>Status: {{serverStatus}}</p>
+
+<button 
+  class="btn btn-primary" 
+  (click)="toggleServer()"
+  [disabled]="!allowNewServer"
+>
+  Add Server
+</button>
+
+<p>Status of allowNewServer: {{allowNewServer}}</p>
+<hr>
+
+<h5>This image will show 50% of the time, if boolean is true (showImage status: {{showImage}})</h5>
+<div class="text-center" *ngIf="showImage">
+  <img class="img-thumbnail img-fluid" alt="Nothing to show" [src]="imageSource">
+</div>
